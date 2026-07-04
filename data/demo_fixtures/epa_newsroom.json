@@ -1,0 +1,20 @@
+[
+  {
+    "title": "EPA Issues Notice of Violation Against Regional Mining Operator Over Water Discharge Permit",
+    "url": "https://example-epa.gov/newsreleases/2026/06/15/notice-of-violation-mining-operator",
+    "published_at": "2026-06-15T16:00:00+00:00",
+    "content": "The Environmental Protection Agency issued a notice of violation against a regional mining operator for exceeding permitted discharge limits at a tailings facility. The agency has ordered remediation within 90 days and may pursue civil penalties if the operator fails to comply."
+  },
+  {
+    "title": "EPA Grants Environmental Permit for Nevada Lithium Processing Facility",
+    "url": "https://example-epa.gov/newsreleases/2026/06/02/nevada-lithium-facility-permit-granted",
+    "published_at": "2026-06-02T10:00:00+00:00",
+    "content": "The EPA has granted the final environmental permit required for construction of a lithium processing facility in Nevada, clearing the last major regulatory hurdle for the project. Construction is expected to begin in the third quarter."
+  },
+  {
+    "title": "EPA Publishes Annual Air Quality Compliance Report",
+    "url": "https://example-epa.gov/newsreleases/2026/03/20/annual-air-quality-report",
+    "published_at": "2026-03-20T08:00:00+00:00",
+    "content": "The EPA published its routine annual air quality compliance report covering industrial facilities nationwide, including several mining and processing sites. The report is informational and does not announce any new enforcement actions."
+  }
+]

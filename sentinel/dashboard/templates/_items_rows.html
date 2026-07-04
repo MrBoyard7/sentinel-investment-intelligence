@@ -1,0 +1,22 @@
+{% for item in items %}
+<tr class="item-row" data-sentiment="{{ item.sentiment }}">
+  <td class="col-signal">
+    <div class="signal-bars signal-bars--{{ item.sentiment|lower }}" title="Score {{ item.score }}/5">
+      {% for i in range(1, 6) %}
+      <span class="signal-bar {{ 'is-filled' if i <= item.score else '' }}"></span>
+      {% endfor %}
+    </div>
+  </td>
+  <td class="col-sentiment">
+    <span class="sentiment-dot sentiment-dot--{{ item.sentiment|lower }}"></span>
+    <span class="sentiment-label">{{ item.sentiment }}</span>
+  </td>
+  <td class="col-category"><span class="chip">{{ item.category }}</span></td>
+  <td class="col-headline">
+    <a href="{{ item.url }}" target="_blank" rel="noopener" class="headline-link">{{ item.title }}</a>
+    <div class="source-name">{{ item.source_name }}</div>
+    <div class="summary-text">{{ item.summary }}</div>
+  </td>
+  <td class="col-date mono">{{ item.published_at[:10] }}</td>
+</tr>
+{% endfor %}

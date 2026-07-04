@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="app-shell">
+
+  <header class="topbar">
+    <div class="wordmark">
+      <span class="wordmark-mark">◆</span>
+      <span class="wordmark-text">SENTINEL</span>
+    </div>
+    <div class="topbar-meta">
+      <span class="theme-name">{{ theme.get('name', 'Investment Intelligence') }}</span>
+      <span class="divider">·</span>
+      <span class="last-scan">Last scan <span id="last-scan-time" class="mono">just now</span></span>
+    </div>
+  </header>
+
+  <section class="stats-strip">
+    <div class="stat-card">
+      <span class="stat-value mono" id="stat-total">{{ stats.total_items }}</span>
+      <span class="stat-label">Items monitored</span>
+    </div>
+    <div class="stat-card stat-card--accent">
+      <span class="stat-value mono" id="stat-high-priority">{{ stats.high_priority_items }}</span>
+      <span class="stat-label">High-priority signals</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value mono">{{ stats.by_sentiment.get('Positive', 0) }}</span>
+      <span class="stat-label">Positive developments</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value mono">{{ stats.by_sentiment.get('Negative', 0) }}</span>
+      <span class="stat-label">Negative developments</span>
+    </div>
+  </section>
+
+  <section class="filter-bar">
+    <div class="filter-group">
+      <label for="filter-score">Min. score</label>
+      <select id="filter-score">
+        <option value="">Any</option>
+        <option value="2">2+</option>
+        <option value="3">3+</option>
+        <option value="4">4+</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="filter-sentiment">Sentiment</label>
+      <select id="filter-sentiment">
+        <option value="">Any</option>
+        <option value="Positive">Positive</option>
+        <option value="Negative">Negative</option>
+        <option value="Neutral">Neutral</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="filter-category">Category</label>
+      <select id="filter-category">
+        <option value="">Any</option>
+        {% for category in stats.by_category.keys() %}
+        <option value="{{ category }}">{{ category }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <span class="filter-count"><span id="visible-count">{{ items|length }}</span> shown</span>
+  </section>
+
+  <section class="items-panel">
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th class="col-signal">Signal</th>
+          <th class="col-sentiment">Sentiment</th>
+          <th class="col-category">Category</th>
+          <th class="col-headline">Headline</th>
+          <th class="col-date">Date</th>
+        </tr>
+      </thead>
+      <tbody id="items-tbody">
+        {% include "_items_rows.html" %}
+      </tbody>
+    </table>
+    <p class="empty-state" id="empty-state" style="display:none;">
+      No items match these filters. Try widening your selection.
+    </p>
+  </section>
+
+  <footer class="footer">
+    Sentinel — AI-Powered Investment Intelligence &amp; Alert System · Demo dataset for portfolio purposes
+  </footer>
+
+</div>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

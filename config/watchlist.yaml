@@ -1,0 +1,86 @@
+# -----------------------------------------------------------------------------
+# Watchlist configuration
+# -----------------------------------------------------------------------------
+# This file defines WHAT Sentinel should care about. It is intentionally
+# decoupled from the collectors and the AI scorer: swapping this file (and
+# sources.yaml) is enough to repoint the whole system at a new investment
+# theme without touching a single line of code.
+#
+# First use case, as specified in the project brief: critical minerals,
+# mining projects, government policy, permitting, and the publicly traded
+# companies affected by these developments.
+# -----------------------------------------------------------------------------
+
+theme:
+  id: critical-minerals
+  name: "Critical Minerals & Mining"
+  description: >
+    Tracks regulatory, legal, permitting, and policy developments affecting
+    critical minerals supply chains, domestic mining projects, and the
+    publicly traded companies exposed to them.
+
+# Keywords used by the relevance filter (sentinel/relevance.py) to decide
+# whether a collected item is worth sending to the AI scorer at all.
+# Matching is case-insensitive and checks title + body content.
+keywords:
+  - critical minerals
+  - rare earth elements
+  - rare earth
+  - lithium
+  - cobalt
+  - nickel supply
+  - graphite
+  - copper mine
+  - mining permit
+  - permitting reform
+  - Defense Production Act
+  - strategic minerals reserve
+  - domestic mining
+  - mineral supply chain
+  - mine approval
+  - mine permit
+  - offtake agreement
+  - critical minerals list
+  - mining royalty
+  - export controls minerals
+
+# Publicly traded companies whose tickers should be tagged whenever they are
+# mentioned in a collected item, even if a keyword above did not match.
+companies:
+  - name: "MP Materials"
+    ticker: "MP"
+    exchange: "NYSE"
+  - name: "Albemarle"
+    ticker: "ALB"
+    exchange: "NYSE"
+  - name: "Lithium Americas"
+    ticker: "LAC"
+    exchange: "NYSE"
+  - name: "Piedmont Lithium"
+    ticker: "PLL"
+    exchange: "NASDAQ"
+  - name: "Ivanhoe Electric"
+    ticker: "IE"
+    exchange: "NYSE"
+  - name: "Vulcan Materials"
+    ticker: "VMC"
+    exchange: "NYSE"
+  - name: "Freeport-McMoRan"
+    ticker: "FCX"
+    exchange: "NYSE"
+
+# Government bodies whose announcements are always treated as in-scope for
+# this theme, regardless of keyword matches, since anything they publish in
+# the mining/critical-minerals space is presumed relevant by definition.
+agencies:
+  - "Department of the Interior"
+  - "Environmental Protection Agency"
+  - "Department of Energy"
+  - "Department of Defense"
+  - "White House"
+
+# Minimum importance score (1-5, assigned by the AI scorer) that triggers an
+# immediate alert instead of waiting for the daily/weekly digest. This can be
+# overridden per-deployment via the IMMEDIATE_ALERT_SCORE environment
+# variable; the value here is the default used when that variable is unset.
+immediate_alert_score: 4

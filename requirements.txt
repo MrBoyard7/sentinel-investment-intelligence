@@ -1,0 +1,21 @@
+# Core pipeline
+feedparser==6.0.11
+requests==2.32.3
+beautifulsoup4==4.12.3
+python-dotenv==1.0.1
+PyYAML==6.0.2
+
+# AI scoring
+openai==1.51.0
+
+# Storage
+SQLAlchemy==2.0.35
+
+# Dashboard
+Flask==3.0.3
+
+# Scheduling
+APScheduler==3.10.4
+
+# Dev / testing
+pytest==8.3.3

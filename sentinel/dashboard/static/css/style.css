@@ -1,0 +1,337 @@
+/* -----------------------------------------------------------------------
+   Sentinel dashboard — design tokens
+   Ink-navy "briefing room" backdrop, a single brass accent reserved for
+   high-priority signal and the wordmark, and a serif/mono pairing that
+   reads like an intelligence dossier rather than a generic SaaS panel.
+   The signature element is the signal-bars meter: a literal visualization
+   of "signal strength" standing in for the 1-5 importance score.
+   ----------------------------------------------------------------------- */
+
+:root {
+  --ink-950: #0A0F1A;
+  --ink-900: #10192B;
+  --ink-800: #1B2740;
+  --line-700: #2A3757;
+
+  --paper-100: #E7EAF2;
+  --muted-400: #8592AC;
+
+  --brass-500: #C9A227;
+  --brass-300: #E4C766;
+
+  --signal-green: #3FA772;
+  --signal-red: #D1554A;
+  --signal-neutral: #6B7690;
+
+  --font-display: "Source Serif 4", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--ink-950);
+  color: var(--paper-100);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.app-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 24px 60px;
+}
+
+/* --- Top bar -------------------------------------------------------- */
+
+.topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line-700);
+  margin-bottom: 24px;
+}
+
+.wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.wordmark-mark {
+  color: var(--brass-500);
+  font-size: 14px;
+}
+
+.wordmark-text {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0.08em;
+}
+
+.topbar-meta {
+  color: var(--muted-400);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar-meta .divider {
+  color: var(--line-700);
+}
+
+.topbar-meta #last-scan-time {
+  color: var(--paper-100);
+}
+
+/* --- Stats strip ------------------------------------------------------ */
+
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--ink-900);
+  border: 1px solid var(--line-700);
+  border-radius: 6px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-card--accent {
+  border-color: var(--brass-500);
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--paper-100);
+}
+
+.stat-card--accent .stat-value {
+  color: var(--brass-300);
+}
+
+.stat-label {
+  color: var(--muted-400);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* --- Filter bar -------------------------------------------------------- */
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 16px;
+  background: var(--ink-900);
+  border: 1px solid var(--line-700);
+  border-radius: 6px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-group label {
+  color: var(--muted-400);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.filter-group select {
+  background: var(--ink-950);
+  color: var(--paper-100);
+  border: 1px solid var(--line-700);
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.filter-group select:focus-visible {
+  outline: 2px solid var(--brass-500);
+  outline-offset: 1px;
+}
+
+.filter-count {
+  margin-left: auto;
+  color: var(--muted-400);
+  font-size: 12px;
+}
+
+.filter-count #visible-count {
+  color: var(--paper-100);
+  font-family: var(--font-mono);
+}
+
+/* --- Items table -------------------------------------------------------- */
+
+.items-panel {
+  background: var(--ink-900);
+  border: 1px solid var(--line-700);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.items-table thead th {
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted-400);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line-700);
+  font-weight: 500;
+}
+
+.item-row td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--ink-800);
+  vertical-align: top;
+}
+
+.item-row:last-child td {
+  border-bottom: none;
+}
+
+.item-row:hover {
+  background: var(--ink-800);
+}
+
+.col-signal { width: 80px; }
+.col-sentiment { width: 110px; }
+.col-category { width: 140px; }
+.col-date { width: 100px; white-space: nowrap; }
+
+/* Signature element: signal bars (radar/signal-strength style meter) */
+.signal-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 20px;
+}
+
+.signal-bar {
+  width: 5px;
+  background: var(--ink-800);
+  border-radius: 1px;
+}
+
+.signal-bar:nth-child(1) { height: 6px; }
+.signal-bar:nth-child(2) { height: 10px; }
+.signal-bar:nth-child(3) { height: 14px; }
+.signal-bar:nth-child(4) { height: 17px; }
+.signal-bar:nth-child(5) { height: 20px; }
+
+.signal-bar.is-filled {
+  background: var(--muted-400);
+}
+
+.signal-bars--positive .signal-bar.is-filled { background: var(--signal-green); }
+.signal-bars--negative .signal-bar.is-filled { background: var(--signal-red); }
+.signal-bars--neutral .signal-bar.is-filled { background: var(--muted-400); }
+
+.sentiment-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.sentiment-dot--positive { background: var(--signal-green); }
+.sentiment-dot--negative { background: var(--signal-red); }
+.sentiment-dot--neutral { background: var(--signal-neutral); }
+
+.sentiment-label {
+  color: var(--muted-400);
+  font-size: 13px;
+}
+
+.chip {
+  display: inline-block;
+  background: var(--ink-800);
+  border: 1px solid var(--line-700);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 12px;
+  color: var(--paper-100);
+}
+
+.headline-link {
+  color: var(--paper-100);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.headline-link:hover {
+  color: var(--brass-300);
+  text-decoration: underline;
+}
+
+.source-name {
+  color: var(--muted-400);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.summary-text {
+  color: var(--muted-400);
+  font-size: 13px;
+  margin-top: 6px;
+  max-width: 60ch;
+}
+
+.empty-state {
+  padding: 40px 16px;
+  text-align: center;
+  color: var(--muted-400);
+}
+
+.footer {
+  margin-top: 24px;
+  text-align: center;
+  color: var(--line-700);
+  font-size: 12px;
+}
+
+@media (max-width: 720px) {
+  .stats-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .col-category, .col-date {
+    display: none;
+  }
+}

@@ -1,0 +1,79 @@
+# -----------------------------------------------------------------------------
+# Sources configuration
+# -----------------------------------------------------------------------------
+# Each entry describes WHERE Sentinel looks and HOW it collects from there.
+# `type` selects the collector implementation (see sentinel/collectors/):
+#   - rss:    parsed with the RSSCollector (feedparser)
+#   - scrape: parsed with the WebScraperCollector (requests + BeautifulSoup)
+#
+# Every source also answers the brief's screening question directly: this
+# file is the literal "Source" column of the
+#   Source -> Collection Method -> AI Analysis -> Dashboard -> Alert
+# workflow described in docs/architecture.md.
+# -----------------------------------------------------------------------------
+
+sources:
+  - id: federal_register
+    name: "Federal Register"
+    type: rss
+    category: "Government / Regulatory"
+    url: "https://www.federalregister.gov/documents/search.rss?conditions%5Bterm%5D=critical+minerals"
+    notes: >
+      Official daily journal of the U.S. federal government. Surfaces
+      proposed and final rules, notices, and executive documents that
+      mention the watchlist keywords.
+
+  - id: epa_newsroom
+    name: "EPA Newsroom"
+    type: rss
+    category: "Regulatory"
+    url: "https://www.epa.gov/newsreleases/search/rss"
+    notes: >
+      Environmental Protection Agency press releases; relevant for permitting,
+      environmental review, and enforcement actions tied to mining projects.
+
+  - id: whitehouse_actions
+    name: "White House Presidential Actions"
+    type: scrape
+    category: "Policy"
+    url: "https://www.whitehouse.gov/briefing-room/presidential-actions/"
+    list_selector: "article"
+    title_selector: "h2 a"
+    link_selector: "h2 a"
+    date_selector: "time"
+    notes: >
+      Executive orders, memoranda, and proclamations. Scraped rather than
+      polled via RSS because the White House does not publish a reliable
+      feed for this section.
+
+  - id: doi_news
+    name: "Department of the Interior Newsroom"
+    type: rss
+    category: "Government / Regulatory"
+    url: "https://www.doi.gov/feeds/pressreleases.xml"
+    notes: >
+      Covers permitting decisions, land-use rulings, and mineral leasing
+      announcements for federal lands.
+
+  - id: doe_news
+    name: "Department of Energy Newsroom"
+    type: rss
+    category: "Government / Regulatory"
+    url: "https://www.energy.gov/rss.xml"
+    notes: >
+      Covers critical minerals funding programs, loan guarantees, and supply
+      chain initiatives (e.g. Bipartisan Infrastructure Law programs).
+
+  - id: company_press_mp_materials
+    name: "MP Materials — Press Releases"
+    type: scrape
+    category: "Company"
+    url: "https://investors.mpmaterials.com/news-releases"
+    list_selector: "div.module-item"
+    title_selector: "a"
+    link_selector: "a"
+    date_selector: "span.date"
+    notes: >
+      Investor-relations press release feed for a watchlisted company.
+      The same scrape template is reused for any company on the watchlist
+      that exposes a similar investor-relations page.
