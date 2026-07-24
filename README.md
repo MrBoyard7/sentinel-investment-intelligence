@@ -65,7 +65,7 @@ and open `http://127.0.0.1:5000` to see it live against the bundled demo data.
 ```bash
 git clone https://github.com/MrBoyard7/sentinel-investment-intelligence.git
 cd sentinel-investment-intelligence
-python -m venv .venv && source .venv\Scripts\Activate.ps1
+python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
 cp .env.example .env   # defaults to DEMO_MODE=true, no keys needed
@@ -165,8 +165,17 @@ preferred, and rough cost/timeline estimates.
 
 ```bash
 pip install -r requirements-dev.txt
+
+# Run the full test suite with a coverage report
 pytest -v --cov=sentinel --cov-report=term-missing
+
+# Check that the code follows this project's formatting standard (black)
+black --check sentinel tests
 ```
+
+Both commands are exactly what the [CI workflow](.github/workflows/ci.yml) runs on every push and pull request — the `CI` badge at the top of this README reflects their result. Current status: **84 tests, 99% coverage**.
+
+If `black --check` reports files that need reformatting, run `black sentinel tests` to apply the fix automatically (it only touches formatting — spacing, quotes, line wrapping — never logic).
 
 ## Extending to a new investment theme
 
