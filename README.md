@@ -57,8 +57,9 @@ and open `http://127.0.0.1:5000` to see it live against the bundled demo data.
   for high-priority items, plus daily/weekly digests for everything else
 - **Demo mode** — the entire pipeline runs offline against bundled fixture
   data, so the system is reviewable without any credentials
-- **Tested** — `pytest` suite covering the relevance filter, the fallback
-  scorer, and a full end-to-end pipeline run
+- **Tested** — 84 tests, 99% coverage: the relevance filter, both scoring
+  paths (heuristic and OpenAI), live and demo collection, every alert
+  channel, the storage layer, the dashboard API, and the CLI
 
 ## Quickstart
 
@@ -135,10 +136,19 @@ sentinel-investment-intelligence/
 │       ├── templates/            # dashboard.html, base.html, _items_rows.html
 │       └── static/                # style.css, dashboard.js
 └── tests/
-    ├── test_relevance.py
-    ├── test_scorer.py
-    ├── test_collectors.py
-    └── test_pipeline.py
+    ├── test_settings.py          # env-var parsing helpers
+    ├── test_relevance.py         # keyword/company/agency matching
+    ├── test_ai_prompts.py        # AI prompt construction
+    ├── test_scorer.py            # heuristic fallback scorer
+    ├── test_scorer_openai.py     # OpenAI path (mocked) + failure fallback
+    ├── test_collectors.py        # demo-mode collection
+    ├── test_collectors_live.py   # live RSS/scraping paths (mocked network)
+    ├── test_alerts_channels.py   # email/Slack/SMS (dry-run + mocked network)
+    ├── test_digest.py            # immediate alert + digest routing
+    ├── test_database.py          # storage layer: filters, digests, stats
+    ├── test_dashboard.py         # Flask app + JSON API
+    ├── test_cli.py               # CLI command dispatch
+    └── test_pipeline.py          # full end-to-end pipeline + scheduler
 ```
 
 ## Configuration
